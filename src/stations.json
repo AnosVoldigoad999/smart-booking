@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "name": "Downtown Auto",
+      "location": "123 Main St",
+      "timeSlots": ["2025-05-18T09:00:00", "2025-05-18T11:00:00"],
+      "carTypes": ["Sedan", "SUV"],
+      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
+    },
+    {
+      "id": 2,
+      "name": "Westside Garage",
+      "location": "345 Bala Ave",
+      "timeSlots": ["2025-05-18T10:00:00"],
+      "carTypes": ["Sedan", "SUV"],
+      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
+    },
+    {
+      "id": 3,
+      "name": "Eastside Garage",
+      "location": "298 Rep St",
+      "timeSlots": ["2025-05-18T10:00:00"],
+      "carTypes": ["Truck"],
+      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
+    },
+    {
+      "id": 4,
+      "name": "Southside Garage",
+      "location": "982 Book St",
+      "timeSlots": ["2025-05-18T10:00:00"],
+      "carTypes": ["Truck"],
+      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
+    },
+    {
+      "id": 5,
+      "name": "Northside Garage",
+      "location": "247 Type Ave",
+      "timeSlots": ["2025-05-18T10:00:00"],
+      "carTypes": ["Hatchback"],
+      "services":["Oil Change", "Brake Repair", "Engine Diagnostic"]
+    }
+  ]
