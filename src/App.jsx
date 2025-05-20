@@ -1,3 +1,5 @@
+import React, {useContext} from 'react';
+import { useBooking} from './BookingContext';
 import { FaCheckCircle, FaCar, FaWrench } from 'react-icons/fa';
 import { BsFillMoonFill } from "react-icons/bs";
 import { IoMdSunny } from "react-icons/io";
@@ -12,24 +14,9 @@ import SERVICES from "./services.json"
 import CARTYPES from "./carTypes.json"
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const [isWaiting, setIsWaiting] = useState(true)
-  const carTypes = CARTYPES;
-  const services = SERVICES;
-  const stations = STATIONS;
-  const [selectedOptions, setSelectedOptions] = useState({carType:"", repairService:""})
-  const [bookingDetails, setBookingDetails] = useState({chosenStation:"", slot:""})
-  const [showSuccess, setShowSuccess] = useState(false)
-  const [theme, setTheme] = useState(()=>{
-    const gotten = JSON.parse(localStorage.getItem("balancee-repair-theme"))
-    if(gotten){
-      return gotten
-    }else{
-      return "light"
-    }
-  })
-  //const bookingSuccess = { station: 'Downtown Auto', slot: 'May 18, 2025, 9:00 AM' }; // Toggle to test success state
-  const [showEmpty, setShowEmpty] = useState(false)
+  const {carTypes, services, stations, showSuccess, setShowSuccess, theme, setTheme, selectedOptions, setSelectedOptions, bookingDetails, setBookingDetails} = useBooking()
   useEffect(()=>{
     if(selectedOptions.carType && selectedOptions.repairService){
       setIsLoading(true)
@@ -47,12 +34,9 @@ const App = () => {
     setSelectedOptions({carType:"", repairService:""})
   }
 
-  useEffect(()=>{
-    localStorage.setItem("balancee-repair-theme", JSON.stringify(theme))
-  }, [theme])
 
   return (
-    <div className={`relative min-h-screen ${theme==="light"?"bg-gradient-to-br from-gray-100 to-gray-200":"bg-gradient-to-br from-gray-500 to-gray-600"} flex items-center justify-center p-4 sm:p-6 transition-bg duration-300 ease-in-out`}>
+      <div className={`relative min-h-screen ${theme==="light"?"bg-gradient-to-br from-gray-100 to-gray-200":"bg-gradient-to-br from-gray-500 to-gray-600"} flex items-center justify-center p-4 sm:p-6 transition-bg duration-300 ease-in-out`}>
       <span className='absolute cursor-pointer top-5 right-5 w-6 h-6'>
         {
           theme==="dark" ? <BsFillMoonFill onClick={()=>{setTheme("light")}} className='min-h-full min-w-full text-white' />:
@@ -79,8 +63,8 @@ const App = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-              <Select theme={theme} label="Car Type" onChange={(e)=>{setSelectedOptions({...selectedOptions, carType:e.target.value})}} options={carTypes} value={selectedOptions.carType} icon={FaCar} />
-              <Select theme={theme} label="Repair Service" onChange={(e)=>{setSelectedOptions({...selectedOptions, repairService:e.target.value})}} options={services} value={selectedOptions.repairService} icon={FaWrench} />
+              <Select label="Car Type" onChange={(e)=>{setSelectedOptions({...selectedOptions, carType:e.target.value})}} options={carTypes} value={selectedOptions.carType} icon={FaCar} />
+              <Select label="Repair Service" onChange={(e)=>{setSelectedOptions({...selectedOptions, repairService:e.target.value})}} options={services} value={selectedOptions.repairService} icon={FaWrench} />
             </div>
 
             {isLoading ? (
@@ -93,7 +77,7 @@ const App = () => {
                 <p className="text-lg">Please input the required details</p>
               </div>
             ) : (
-              <Stations theme={theme} setShowEmpty={setShowEmpty} setShowSuccess={setShowSuccess} bookingDetails={bookingDetails} setBookingDetails={setBookingDetails} stations={stations} selectedOptions={selectedOptions} />
+              <Stations />
             )}
           </>
         )}

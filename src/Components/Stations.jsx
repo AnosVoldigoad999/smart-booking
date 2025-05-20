@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import StationCard from './StationCard'
-function Stations({theme, stations, selectedOptions, bookingDetails, setBookingDetails, setShowSuccess, setShowEmpty}) {
+import { useBooking } from '../BookingContext'
+function Stations() {
+    const {theme, 
+        stations, 
+        bookingDetails, 
+        setBookingDetails, 
+        setShowSuccess, 
+        showEmpty, 
+        setShowEmpty, 
+        selectedOptions} = useBooking()
     const [availableStations, setAvailableStations] = useState(()=>{
         const newStations = stations.filter(station=>{
             const carTypes = station.carTypes //car types the station accepts

@@ -1,7 +1,9 @@
 import { IoChevronDown } from "react-icons/io5";
+import { useBooking } from "../BookingContext";
 
-const Select = ({ label, options, value, icon: Icon, onChange, theme }) => (
-    <div className="relative">
+const Select = ({ label, options, value, icon: Icon, onChange }) => {
+  const {theme} = useBooking()
+   return <div className="relative">
       <label className={`block text-sm font-medium ${theme==="light"?"text-gray-700":"text-white"} mb-2 flex items-center`}>
         <Icon className="mr-2 text-teal-500 text-lg" /> {label}
       </label>
@@ -21,6 +23,6 @@ const Select = ({ label, options, value, icon: Icon, onChange, theme }) => (
         <IoChevronDown className="text-gray-400 w-5 h-5" />
       </div>
     </div>
-  );
+};
   
   export default Select;
