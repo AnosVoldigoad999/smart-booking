@@ -1,6 +1,6 @@
-##Balanceè Repair Booking
+Balanceè Repair Booking
 
-##Overview
+Overview
 
 Balanceè Repair Booking is a React-based web application that allows users to book car repair services by selecting a car type and repair service, viewing nearby stations with available time slots, and confirming bookings with a success message. The application features a modern, responsive UI styled with Tailwind CSS, a light/dark theme toggle, and modular components for reusability. State management is handled via React Context, with data sourced from JSON files for car types, services, and stations.
 
