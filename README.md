@@ -217,7 +217,7 @@ Installation
 Clone the Repository (or copy files to your project):
 
 git clone <repository-url>
-cd balancee-repair-booking
+cd smart-booking
 
 
 
