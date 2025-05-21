@@ -35,9 +35,9 @@ const StationCard = ({ station, delay}) => {
       </label>
       <select
       onChange={(e)=>{handleDate(e.target.value);}}
-        className={`w-full p-3 ${theme==="light"?"bg-gray-50 text-gray-800 border-gray-200":"bg-gray-800 text-gray-50 border-gray-500"} border-2  rounded-lg focus:border-teal-500  transition-all duration-200 outline-none appearance-none cursor-pointer`}
+        className={`w-full p-3 ${theme==="light"?"bg-gray-50 text-gray-800 border-gray-200":"bg-gray-800 text-gray-50 border-gray-500"} border-2  rounded-lg focus:border-teal-500  transition-all duration-200 outline-none appearance-none cursor-pointer text-sm`}
       >
-        <option value="">Select a time slot</option>
+        <option>Select a time slot</option>
         {station.timeSlots.map((slot, index) => (
           <option key={`${slot.time}${index}`} value={slot.id}>
               {slot.time}
