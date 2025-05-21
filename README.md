@@ -1,16 +1,12 @@
-Balanceè Repair Booking
+# Balanceè Repair Booking
 
-Overview
+## Overview
 
 Balanceè Repair Booking is a React-based web application that allows users to book car repair services by selecting a car type and repair service, viewing nearby stations with available time slots, and confirming bookings with a success message. The application features a modern, responsive UI styled with Tailwind CSS, a light/dark theme toggle, and modular components for reusability. State management is handled via React Context, with data sourced from JSON files for car types, services, and stations.
 
 This project was developed to provide a visually appealing and user-friendly interface, prioritizing simplicity, modularity, and maintainability. It addresses specific requirements for a clean UI, efficient state management, and error-free operation.
 
-Features
-
-
-
-
+## Features
 
 Car Type and Service Selection: Users select a car type (e.g., Sedan, SUV) and repair service (e.g., Oil Change, Brake Repair) via dropdowns.
 
@@ -42,9 +38,8 @@ JSON Data: Sources car types, services, and stations from carTypes.json, service
 
 UI States: Handles loading, waiting, empty, and success states for a seamless user experience.
 
-Tech Stack
 
-
+## Tech Stack
 
 
 
@@ -76,7 +71,7 @@ JSON: Static data files for car types, services, and stations.
 Vite: Build tool for fast development.
 
 
-Key Implementation Choices
+## Key Implementation Choices
 
 1. Modular Component Design
 
@@ -194,7 +189,8 @@ Success: Renders a confirmation with FaCheckCircle and booking details.
 
 Impact: Creates a seamless, intuitive experience, aligning with your goal of a polished UI.
 
-Setup Instructions
+
+## Setup Instructions
 
 Prerequisites
 
@@ -208,10 +204,9 @@ Node.js: Version 16 or higher.
 
 npm: Version 7 or higher.
 
-Installation
 
 
-
+### Installation
 
 
 Clone the Repository (or copy files to your project):
@@ -221,7 +216,7 @@ cd smart-booking
 
 
 
-Install Dependencies:
+### Install Dependencies:
 
 npm install
 
@@ -265,7 +260,7 @@ stations.json:
   }
 ]
 
-Running the App
+### Running the App
 
 
 
@@ -279,7 +274,7 @@ Open http://localhost:5173 (or your Vite port) in a browser.
 
 
 
-Test the UI:
+### Test the UI:
 
 
 
