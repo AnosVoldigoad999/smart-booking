@@ -9,9 +9,7 @@ import LoadingSpinner from './Components/LoadingSpinner';
 import "./App.css"
 import { useEffect, useState } from 'react';
 import Stations from './Components/Stations';
-import STATIONS from "./stations.json"
-import SERVICES from "./services.json"
-import CARTYPES from "./carTypes.json"
+
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +52,7 @@ const App = () => {
             <h2 className="text-2xl font-semibold text-gray-800 mb-3">Booking Confirmed!</h2>
             <p className=" mb-6 text-lg">
               Your appointment at <strong>{bookingDetails.chosenStation}</strong> is set for{' '}
-              <strong>{bookingDetails.slot}</strong>.
+              <strong>{bookingDetails.slot.time}, {bookingDetails.slot.today?"Today":"Tommorrow"}</strong>.
             </p>
             <button onClick={handleNew} className="bg-teal-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-teal-700 transition-colors duration-200 cursor-pointer">
               Book Another

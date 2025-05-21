@@ -1,18 +1,30 @@
 import { useState } from 'react';
 import { FaMapMarkerAlt, FaClock } from 'react-icons/fa';
-
-const StationCard = ({ theme, station, bookingDetails, setBookingDetails, setShowSuccess}) => {
-    const [chosenSlot, setChosenSlot] = useState("")
+import { useBooking } from '../BookingContext';
+import {motion} from "framer-motion"
+import { fromBottomToTop, others } from './Animation';
+const StationCard = ({ station, delay}) => {
+  const {theme, bookingDetails, setBookingDetails, setShowSuccess} = useBooking()  
+  const [chosenSlot, setChosenSlot] = useState("")
     function handleBook(){
         setBookingDetails({chosenStation:station.name, slot:chosenSlot})
         setShowSuccess(true)
     }
 
-    function handleDate(rawDate){
-        const date = new Date(rawDate).toLocaleTimeString([], {day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit"})
-        setChosenSlot(date)
+    function handleDate(id){
+        const newId = Number(id) //convert id to number
+        station.timeSlots.forEach(slot=>{
+          if(newId===slot.id){
+            setChosenSlot(slot) //set chosenSlot to the matching slot
+          }
+        })
     }
- return <div className={`${theme==="light"?"bg-white":"bg-gray-700"} p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300`}>
+ return <motion.div
+ initial={fromBottomToTop.initial}
+ animate={fromBottomToTop.animate}
+ transition={{...others.transition, delay:delay}}
+ viewport={others.viewport}
+ className={`${theme==="light"?"bg-white":"bg-gray-700"} p-6 rounded-xl shadow-lg`}>
     <h3 className={`text-lg font-semibold ${theme==="light"?"text-gray-800":"text-white"} flex items-center mb-2`}>
       <FaMapMarkerAlt className="mr-2 text-teal-500" /> {station.name}
     </h3>
@@ -22,13 +34,13 @@ const StationCard = ({ theme, station, bookingDetails, setBookingDetails, setSho
         <FaClock className="mr-2 text-teal-500" /> Available Time Slots
       </label>
       <select
-      onChange={(e)=>{handleDate(e.target.value)}}
+      onChange={(e)=>{handleDate(e.target.value);}}
         className={`w-full p-3 ${theme==="light"?"bg-gray-50 text-gray-800 border-gray-200":"bg-gray-800 text-gray-50 border-gray-500"} border-2  rounded-lg focus:border-teal-500  transition-all duration-200 outline-none appearance-none cursor-pointer`}
       >
         <option value="">Select a time slot</option>
-        {station.timeSlots.map((slot) => (
-          <option key={slot} value={slot}>
-            {new Date(slot).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        {station.timeSlots.map((slot, index) => (
+          <option key={`${slot.time}${index}`} value={slot.id}>
+              {slot.time}
           </option>
         ))}
       </select>
@@ -40,7 +52,7 @@ const StationCard = ({ theme, station, bookingDetails, setBookingDetails, setSho
     >
       Book Now
     </button>
-  </div>
+  </motion.div>
 };
 
 export default StationCard;

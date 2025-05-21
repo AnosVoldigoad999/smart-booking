@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import StationCard from './StationCard'
 import { useBooking } from '../BookingContext'
+
 function Stations() {
     const {theme, 
         stations, 
@@ -40,8 +41,8 @@ function Stations() {
     availableStations.length!=0? <div>
         <h2 className="text-xl font-semibold mb-4">Available Stations</h2>
          <div className="space-y-4">
-            {availableStations.map((station) => (
-            <StationCard theme={theme} setShowSuccess={setShowSuccess} bookingDetails={bookingDetails} setBookingDetails={setBookingDetails} key={station.id} station={station} />
+            {availableStations.map((station, index) => (
+            <StationCard delay={index * 0.01}  key={station.id} station={station} />
             ))}
         </div>
     </div> : <div className="text-center py-8">

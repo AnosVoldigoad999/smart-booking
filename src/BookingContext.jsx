@@ -1,53 +1,34 @@
 import React, {createContext, useContext, useState, useEffect} from "react"
+import { parse, isAfter } from 'date-fns';
+import STATIONS from "./stations.json"
+import CARTYPES from './carTypes.json'
+import SERVICES from './services.json'
 
 const BookingContext = createContext()
 
 export function BookingProvider({children}){
   const [showSuccess, setShowSuccess] = useState(false)
-  const carTypes = ["Sedan", "SUV", "Truck", "Hatchback"]
-  const services = ["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
-  const stations = [
-    {
-      "id": 1,
-      "name": "Downtown Auto",
-      "location": "123 Main St",
-      "timeSlots": ["2025-05-18T09:00:00", "2025-05-18T11:00:00"],
-      "carTypes": ["Sedan", "SUV"],
-      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
-    },
-    {
-      "id": 2,
-      "name": "Westside Garage",
-      "location": "345 Bala Ave",
-      "timeSlots": ["2025-05-18T10:00:00"],
-      "carTypes": ["Sedan", "SUV"],
-      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
-    },
-    {
-      "id": 3,
-      "name": "Eastside Garage",
-      "location": "298 Rep St",
-      "timeSlots": ["2025-05-18T10:00:00"],
-      "carTypes": ["Truck"],
-      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
-    },
-    {
-      "id": 4,
-      "name": "Southside Garage",
-      "location": "982 Book St",
-      "timeSlots": ["2025-05-18T10:00:00"],
-      "carTypes": ["Truck"],
-      "services":["Oil Change", "Tire Rotation", "Brake Repair", "Engine Diagnostic"]
-    },
-    {
-      "id": 5,
-      "name": "Northside Garage",
-      "location": "247 Type Ave",
-      "timeSlots": ["2025-05-18T10:00:00"],
-      "carTypes": ["Hatchback"],
-      "services":["Oil Change", "Brake Repair", "Engine Diagnostic"]
-    }
-  ]
+  const carTypes = CARTYPES
+  const services = SERVICES
+  const stations = STATIONS.map(station=>{
+    let slots = station.timeSlots
+    // Map over each time slot to check if it's in the past or future
+    slots = slots.map(slot=>{
+      const time = slot.time  // Extract the time string (e.g., "9:00 AM")
+      const now = new Date()  // Get current date and time
+      const parsedTime = parse(time, "hh:mm a", new Date()) // Parse the slot time into a Date object
+      
+      // Check if the current time is after the slot time
+      if(isAfter(now, parsedTime)){
+        return {...slot, today:false}
+      }else{
+        return {...slot, today:true}
+      }
+    })
+
+    // Return the updated station object with the new timeSlots array
+    return {...station, timeSlots:slots}
+  })
    const [theme, setTheme] = useState(()=>{
       const gotten = JSON.parse(localStorage.getItem("balancee-repair-theme"))
       if(gotten){
