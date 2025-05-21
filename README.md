@@ -63,6 +63,11 @@ React-Icons: Provides icons (e.g., car, wrench, moon, sun) for enhanced UI.
 React Context: Manages state for selections and booking details.
 
 
+date-fns: Used to compare the selected slot time with the current time of day.
+
+
+Framer-motion: Handles card animations for stations.
+
 
 JSON: Static data files for car types, services, and stations.
 
